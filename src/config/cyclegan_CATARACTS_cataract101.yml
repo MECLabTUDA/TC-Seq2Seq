@@ -1,0 +1,35 @@
+device: 'cuda:0'
+log_dir: '../../results/CycleGAN_CATARACTS_Cataract101/'
+
+data:
+  img_dim: 320  # 128/256/512
+  num_workers: 6
+  root_A: '/local/scratch/CATARACTS-videos-processed/'
+  root_B: '/local/scratch/cataract-101-processed/'
+  seq_frames_train: 1  # Number of sequential frames per sample
+  seq_frames_test: 5
+  dt: 20  # Distance of time-steps of first frame per sequence
+
+model:
+  latent_dim: 512
+
+training:
+  epochs: 10
+  steps_per_epoch: -1
+  batch_size: 4  # 8/4/2
+  initial_lr: 0.0002
+  lr_decay_start_epoch: 5
+  adam_betas: (0.5, 0.999)
+  weight_init: 'xavier normal'
+  weight_decay: 1e-4
+  adversarial_loss_weight: 1.0
+  identity_loss_weight: 1.0
+  cycle_loss_weight: 10
+  discriminator_loss_weight: 0.5
+
+validation:
+  save_freq_samples: 1
+  save_freq_checkpoints: 1
+
+testing:
+  batch_size: 4

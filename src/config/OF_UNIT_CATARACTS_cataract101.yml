@@ -1,0 +1,54 @@
+device: 'cuda:0'
+log_dir: '../../results/OF_UNIT_CATARACTS_Cataract101/'
+
+data:
+  num_workers: 6
+  img_dim: 320
+  in_dim_A: 3
+  in_dim_B: 3
+  root_A: '/local/scratch/CATARACTS-videos-processed/'
+  root_B: '/local/scratch/cataract-101-processed/'
+  seq_frames_train: 2
+  seq_frames_test: 5
+  dt: 20  # Distance of time-steps of first frame per sequence
+
+model:
+  gen:
+    dim: 128  #64
+    n_downsample: 3
+    n_res: 4
+    activation: 'relu'
+    padding_type: 'reflect'
+  disc:
+    dim: 128  # 64
+    norm: 'in'
+    n_layer: 4
+    gan_type: 'smoothed_lsgan'
+    n_scales: 3
+    activation: 'lrelu'
+    padding_type: 'reflect'
+  gan_weight: 10.0  # 1.0
+  recon_x_weight: 100.0
+  recon_x_cyc_weight: 100.0
+  kl_weight: 0.1
+  recon_kl_cyc_weight: 0.1
+  vgg_weight: 10.0
+  vgg_model_path: '/tmp/'
+  of_weight: 10.0
+
+training:
+  epochs: 20
+  steps_per_epoch: -1
+  initial_lr: 0.0001
+  lr_decay_start_epoch: 10
+  adam_betas: (0.5, 0.999)
+  batch_size: 2
+  weight_init: 'xavier normal'
+  weight_decay: 1e-4
+
+validation:
+  save_checkpoint_freq: 20
+  save_samples_freq: 20
+
+testing:
+  batch_size: 4
