@@ -18,9 +18,14 @@ This is the official code repository for *Temporally Consistent Sequence-to-Sequ
 
 * Evaluation scripts can be found in ```scripts/eval/```
 
+## Checkpoints
+
+* Model checkpoints can be found [here](https://hessenbox.tu-darmstadt.de/getlink/fiL3QnyLXftJE4zWVojAHQNK/).
+
 ## Example Results
 
-![](figures/qualitative_examples.png)
+![](figures/qualitative_examples_lm.png#gh-light-mode-only)
+![](figures/qualitative_examples_dm.png#gh-dark-mode-only)
 
 ## How-to Cite
 
